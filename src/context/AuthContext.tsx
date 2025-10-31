@@ -31,7 +31,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const login = async (email: string, password: string): Promise<{ success: boolean; error?: string }> => {
     const validatedUser = validateLogin(email, password);
-    
+
     if (validatedUser) {
       setUser(validatedUser);
       saveAuthUser(validatedUser);
@@ -58,7 +58,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     // Add to mock users (in real app, this would be API call)
     mockUsers.push(newUser);
-    
+
     setUser(newUser);
     saveAuthUser(newUser);
     return { success: true };

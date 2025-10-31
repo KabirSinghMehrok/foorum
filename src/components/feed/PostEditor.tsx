@@ -8,6 +8,7 @@ import VideoIcon from '../../assets/animated-icons/video.svg';
 import AnimatedMicIcon from '../../assets/animated-icons/animated-mic.gif';
 import AnimatedVideoIcon from '../../assets/animated-icons/animated-video.gif';
 import ToolBar from './ToolBar';
+import Reaction from '../common/Reaction';
 
 interface LoginRequiredInteractions {
   textInput?: boolean;
@@ -37,6 +38,7 @@ const PostEditor: React.FC<PostEditorProps> = ({
   const [content, setContent] = useState(preservedContent);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hoveredButton, setHoveredButton] = useState<string | null>(null);
+  const [selectedEmoji, setSelectedEmoji] = useState<'skull' | 'laugh' | 'sad' | 'peace' | null>(null);
   const { user } = useAuth();
 
   // Update content when preservedContent changes
@@ -126,11 +128,13 @@ const PostEditor: React.FC<PostEditorProps> = ({
         timestamp: 'Just now',
         likes: 0,
         comments: 0,
-        shares: 0
+        shares: 0,
+        emoji: selectedEmoji
       };
 
       addPost(newPost);
       setContent('');
+      setSelectedEmoji(null);
 
       if (onPostCreated) {
         onPostCreated();
@@ -156,14 +160,24 @@ const PostEditor: React.FC<PostEditorProps> = ({
             onItalicToggle={handleItalicToggle}
             onUnderlineToggle={handleUnderlineToggle}
           />
-          <TextArea
-            value={content}
-            onChange={handleContentChange}
-            placeholder={placeholderText}
-            rows={3}
-            maxLength={500}
-            className="resize-none"
-          />
+          <div className="flex flex-row w-full">
+            <div className='pt-2'>
+              <Reaction
+                emoji={selectedEmoji}
+                isEditable={true}
+                onEmojiChange={setSelectedEmoji}
+                className=""
+              />
+            </div>
+            <TextArea
+              value={content}
+              onChange={handleContentChange}
+              placeholder={placeholderText}
+              rows={3}
+              maxLength={500}
+              className="resize-none"
+            />
+          </div>
         </div>
 
         {/* Toolbar */}

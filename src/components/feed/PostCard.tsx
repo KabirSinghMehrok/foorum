@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import Avatar from '../common/Avatar';
 import Button from '../common/Button';
+import Reaction from '../common/Reaction';
 import type { Post } from '../../utils/mockData';
 import { getUserById } from '../../utils/mockData';
+import { useAuth } from '../../context/AuthContext';
 import AnimatedHeart from '../../assets/animated-icons/animated-heart.gif';
 import AnimatedChat from '../../assets/animated-icons/animated-chat.gif';
 import AnimatedShare from '../../assets/animated-icons/animated-send.gif';
@@ -12,21 +14,41 @@ import StaticShare from '../../assets/animated-icons/share.svg';
 
 interface PostCardProps {
   post: Post;
+  onLoginRequired?: () => void;
 }
 
-const PostCard: React.FC<PostCardProps> = ({ post }) => {
+const PostCard: React.FC<PostCardProps> = ({ post, onLoginRequired }) => {
   const [hoveredButton, setHoveredButton] = useState<string | null>(null);
+  const { user } = useAuth();
   const author = getUserById(post.userId);
 
+  // Handle login requirement check
+  const requireLogin = () => {
+    if (!user && onLoginRequired) {
+      onLoginRequired();
+      return true;
+    }
+    return false;
+  };
+
   const handleLike = () => {
+    if (requireLogin()) {
+      return;
+    }
     console.log('Function not implemented - Like post:', post.id);
   };
 
   const handleComment = () => {
+    if (requireLogin()) {
+      return;
+    }
     console.log('Function not implemented - Comment on post:', post.id);
   };
 
   const handleShare = () => {
+    if (requireLogin()) {
+      return;
+    }
     console.log('Function not implemented - Share post:', post.id);
   };
 
@@ -61,9 +83,20 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
 
         {/* Content */}
         <div className="mb-3">
-          <p className="text-gray-800 text-sm leading-relaxed whitespace-pre-wrap">
-            {post.content}
-          </p>
+          <div className="flex items-start gap-2">
+            {post.emoji && (
+              <div className="flex-shrink-0 pt-1">
+                <Reaction
+                  emoji={post.emoji}
+                  size="sm"
+                  isEditable={false}
+                />
+              </div>
+            )}
+            <p className="text-gray-800 text-sm leading-relaxed whitespace-pre-wrap flex-1 mt-2">
+              {post.content}
+            </p>
+          </div>
         </div>
       </div>
 

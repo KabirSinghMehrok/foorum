@@ -14,6 +14,7 @@ export interface Post {
   likes: number;
   comments: number;
   shares: number;
+  emoji?: 'skull' | 'laugh' | 'sad' | 'peace' | null;
 }
 
 // Test accounts as specified
@@ -42,7 +43,8 @@ export const mockPosts: Post[] = [
     timestamp: '5 mins ago',
     likes: 12,
     comments: 3,
-    shares: 1
+    shares: 1,
+    emoji: 'laugh'
   },
   {
     id: '2',
@@ -51,7 +53,8 @@ export const mockPosts: Post[] = [
     timestamp: '1 mins ago',
     likes: 8,
     comments: 2,
-    shares: 0
+    shares: 0,
+    emoji: 'peace'
   },
   {
     id: '3',
@@ -60,7 +63,8 @@ export const mockPosts: Post[] = [
     timestamp: '2 mins ago',
     likes: 15,
     comments: 5,
-    shares: 2
+    shares: 2,
+    emoji: 'skull'
   }
 ];
 

@@ -55,6 +55,10 @@ const Forum: React.FC = () => {
     setShowLoginModal(true);
   };
 
+  const handlePostInteractionLoginRequired = () => {
+    setShowLoginModal(true);
+  };
+
   const handleSwitchToSignup = () => {
     setShowLoginModal(false);
     setShowSignupModal(true);
@@ -138,7 +142,11 @@ const Forum: React.FC = () => {
         <div className="space-y-4 mt-4">
           {posts.length > 0 ? (
             posts.map((post) => (
-              <PostCard key={post.id} post={post} />
+              <PostCard
+                key={post.id}
+                post={post}
+                onLoginRequired={handlePostInteractionLoginRequired}
+              />
             ))
           ) : (
             <div className="text-center py-12">
