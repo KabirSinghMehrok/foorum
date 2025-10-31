@@ -53,7 +53,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       name,
       email,
       password,
-      avatar: `/dummy/avatar${mockUsers.length + 1}.svg`
+      avatar: `/dummy/default-avtar.jpg`
     };
 
     // Add to mock users (in real app, this would be API call)

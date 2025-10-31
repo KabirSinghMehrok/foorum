@@ -69,7 +69,7 @@ const SignupModal: React.FC<SignupModalProps> = ({
 
   return (
     <Modal isOpen={isOpen} onClose={handleClose} title="Sign Up" maxWidth="sm">
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-4 text-gray-800">
         {error && (
           <div className="p-3 text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg">
             {error}

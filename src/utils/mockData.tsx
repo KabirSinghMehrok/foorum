@@ -31,27 +31,6 @@ export const mockUsers: User[] = [
     email: 'test@user.com',
     password: 'testpass',
     avatar: '/dummy/avtar2.jpeg'
-  },
-  {
-    id: '3',
-    name: 'Theresa Webb',
-    email: 'theresa@example.com',
-    password: 'password123',
-    avatar: '/dummy/avtar3.jpeg'
-  },
-  {
-    id: '4',
-    name: 'John Doe',
-    email: 'john@example.com',
-    password: 'password123',
-    avatar: '/dummy/avtar4.jpeg'
-  },
-  {
-    id: '5',
-    name: 'Jane Doe',
-    email: 'jane@example.com',
-    password: 'password123',
-    avatar: '/dummy/avtar5.jpeg'
   }
 ];
 
